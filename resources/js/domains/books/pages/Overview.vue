@@ -12,10 +12,9 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
 import { fetchBooks, getAllBooks } from "../store";
+import { onMounted } from "vue";
 
-onMounted(() => {
-    fetchBooks();
-});
+fetchBooks();
+console.log(getAllBooks);
 </script>

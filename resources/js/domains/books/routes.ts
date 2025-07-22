@@ -1,3 +1,4 @@
+// @ts-ignore
 import Overview from "./pages/Overview.vue";
 import Create from "./pages/Create.vue";
 

@@ -9,8 +9,7 @@ export const getAllBooks = computed(() => books.value);
 
 // actions
 export const fetchBooks = async () => {
-    const { data } = await axios.get("/api/books");
-    console.log("Books fetched:", data); // ✅ voeg dit toe
-    if (!data) return;
-    books.value = data;
+    const response = await axios.get("/api/books");
+    // console.log("Books fetched:", data);
+    books.value = response.data.data;
 };
