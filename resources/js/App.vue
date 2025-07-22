@@ -11,6 +11,10 @@
         <router-link :to="{ name: 'books.create' }"
             >Nieuw boek toevoegen</router-link
         >
+        |
+        <router-link :to="{ name: 'authors.create' }"
+            >Nieuwe auteur toevoegen</router-link
+        >
     </nav>
     <router-view></router-view>
 </template>

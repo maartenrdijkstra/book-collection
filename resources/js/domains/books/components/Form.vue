@@ -24,11 +24,11 @@
 <script setup>
 import { ref } from "vue";
 import { fetchAuthors, getAllAuthors } from "../../authors/store";
+import { Book } from "../store";
 
-// Fetch authors when component is mounted
 fetchAuthors();
 
-const props = defineProps({ book: Object });
+const props = defineProps({ book: Book });
 
 const emit = defineEmits(["submit"]);
 

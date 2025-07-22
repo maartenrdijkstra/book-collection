@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ref, computed } from "vue";
 
-class Book {
+export class Book {
     constructor(
         public id: number,
         public title: string,

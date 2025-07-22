@@ -9,7 +9,7 @@
         <tr v-for="book in getAllBooks" :key="book.id">
             <td>{{ book.title }}</td>
             <td>{{ book.summary }}</td>
-            <td>{{ book.author?.name ?? "Onbekend" }}</td>
+            <td>{{ book.author.name ?? "Onbekend" }}</td>
             <td>
                 <RouterLink
                     :to="{ name: 'books.edit', params: { id: book.id } }"
@@ -28,7 +28,7 @@ import { onMounted } from "vue";
 fetchBooks();
 </script>
 
-<style scoped>
+<style>
 table {
     width: 100%;
     border-collapse: collapse;
