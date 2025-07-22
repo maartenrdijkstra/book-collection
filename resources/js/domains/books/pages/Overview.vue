@@ -4,7 +4,7 @@
             <th>Title</th>
             <th>Summary</th>
             <th>Author</th>
-            <th>Actions</th>
+            <th colspan="2">Actions</th>
         </tr>
         <tr v-for="book in getAllBooks" :key="book.id">
             <td>{{ book.title }}</td>
@@ -16,12 +16,13 @@
                     >Bewerk</RouterLink
                 >
             </td>
+            <td><button @click="deleteBook(book.id)">Verwijder</button></td>
         </tr>
     </table>
 </template>
 
 <script setup>
-import { fetchBooks, getAllBooks } from "../store";
+import { fetchBooks, getAllBooks, deleteBook } from "../store";
 import { onMounted } from "vue";
 
 fetchBooks();
