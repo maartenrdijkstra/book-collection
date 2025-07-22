@@ -19,8 +19,6 @@ const book = ref({
     author_id: null,
 });
 
-fetchBooks();
-
 const handleSubmit = async (data) => {
     await createBook(data);
     router.push({ name: "books.overview" });
