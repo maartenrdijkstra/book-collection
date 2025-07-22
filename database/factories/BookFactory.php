@@ -18,7 +18,7 @@ class BookFactory extends Factory
     {
         return [
             'title' => $this->faker->word,
-            'summary' => substr($this->faker->paragraphs(1, true), 0, 80),
+            'summary' => $this->faker->paragraphs(3, true),
             'author_id' => \App\Models\Author::factory(),
         ];
     }

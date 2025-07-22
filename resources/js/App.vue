@@ -4,10 +4,12 @@
             >Boeken Overzicht</router-link
         >
         |
-        <router-link :to="{ name: 'books.create' }">Nieuw Boek</router-link>
-        |
         <router-link :to="{ name: 'authors.overview' }"
             >Auteurs Overzicht</router-link
+        >
+        |
+        <router-link :to="{ name: 'books.create' }"
+            >Nieuw boek toevoegen</router-link
         >
     </nav>
     <router-view></router-view>
