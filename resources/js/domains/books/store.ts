@@ -10,6 +10,5 @@ export const getAllBooks = computed(() => books.value);
 // actions
 export const fetchBooks = async () => {
     const response = await axios.get("/api/books");
-    // console.log("Books fetched:", data);
     books.value = response.data.data;
 };
