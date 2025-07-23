@@ -9,7 +9,7 @@
         <tr v-for="book in books" :key="book.id">
             <td>{{ book.title }}</td>
             <td>{{ book.summary }}</td>
-            <td>{{ book.author?.name ?? "Onbekend" }}</td>
+            <td>{{ book.author.name ?? "Onbekend" }}</td>
             <td>
                 <template v-if="book.id">
                     <RouterLink
@@ -24,9 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { Author } from "../../authors/store";
 import { fetchBooks, getAllBooks, deleteBook, Book } from "../store";
-import { ComputedRef, onMounted, ref } from "vue";
+import { ComputedRef } from "vue";
 
 fetchBooks();
 const books: ComputedRef = getAllBooks;

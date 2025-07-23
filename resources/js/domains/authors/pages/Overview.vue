@@ -20,9 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { ComputedRef } from "vue";
 import { deleteAuthor, fetchAuthors, getAllAuthors } from "../store";
 
 fetchAuthors();
-const authors: ComputedRef = getAllAuthors;
+const authors = getAllAuthors;
 </script>
