@@ -5,21 +5,33 @@
     </div>
 </template>
 
-<script setup>
-import { ref, onMounted, computed } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Form from "./components/Form.vue";
-import { fetchAuthors, getAuthorById, updateAuthor } from "../store";
+import { Author, fetchAuthors, getAuthorById, updateAuthor } from "../store";
 
 const route = useRoute();
 const router = useRouter();
 
 fetchAuthors();
 
-const author = getAuthorById(route.params.id);
+const author = ref<Author>({
+    id: 0,
+    name: "",
+});
 
-const handleSubmit = async (data) => {
-    await updateAuthor(route.params.id, data);
+const authorById = getAuthorById(Number(route.params.id)).value;
+
+if (authorById) {
+    author.value = authorById;
+} else {
+    // fallback of error-afhandeling
+    author.value = { id: 0, name: "Onbekend" };
+}
+
+const handleSubmit = async (data: Author) => {
+    await updateAuthor(Number(route.params.id), data);
     router.push({ name: "authors.overview" });
 };
 </script>

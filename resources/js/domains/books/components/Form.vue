@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Author, fetchAuthors, getAllAuthors } from "../../authors/store";
+import { fetchAuthors, getAllAuthors } from "../../authors/store";
 import { Book } from "../store";
 
 fetchAuthors();
@@ -31,7 +31,6 @@ fetchAuthors();
 const props = defineProps<{ book: Book }>();
 
 const emit = defineEmits(["submit"]);
-
 const form = ref({ ...props.book });
 
 const handleSubmit = () => emit("submit", form.value);

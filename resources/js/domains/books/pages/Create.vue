@@ -5,21 +5,22 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Form from "../components/Form.vue";
-import { createBook, fetchBooks } from "../store";
+import { Book, createBook } from "../store";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 const router = useRouter();
 
-const book = ref({
+const book = ref<Book>({
+    id: 0,
     title: "",
     summary: "",
-    author_id: null,
+    author_id: 0,
 });
 
-const handleSubmit = async (data) => {
+const handleSubmit = async (data: Book) => {
     await createBook(data);
     router.push({ name: "books.overview" });
 };

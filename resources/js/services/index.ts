@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const http = axios.create({
     baseURL: "/api",
@@ -7,9 +7,22 @@ const http = axios.create({
     },
 });
 
-export const getRequest = (endpoint) => http.get(endpoint);
-export const postRequest = (endpoint, data) =>
-    http.post(endpoint, data, { withCredentials: true });
-export const putRequest = (endpoint, data) =>
-    http.put(endpoint, data, { withCredentials: true });
-export const deleteRequest = (endpoint) => http.delete(endpoint);
+export const getRequest = <T>(endpoint: string): Promise<AxiosResponse<T>> =>
+    http.get<T>(endpoint);
+
+export const postRequest = <T, D = unknown>(
+    endpoint: string,
+    data: D
+): Promise<AxiosResponse<T>> => {
+    return http.post<T>(endpoint, data, { withCredentials: true });
+};
+
+export const putRequest = <T, D = unknown>(
+    endpoint: string,
+    data: D
+): Promise<AxiosResponse<T>> => {
+    return http.put<T>(endpoint, data, { withCredentials: true });
+};
+
+export const deleteRequest = <T>(endpoint: string): Promise<AxiosResponse<T>> =>
+    http.delete<T>(endpoint);

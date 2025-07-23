@@ -5,20 +5,21 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Form from "./components/Form.vue";
-import { createAuthor, fetchAuthors } from "../store";
+import { createAuthor, Author } from "../store";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 const router = useRouter();
 
 const author = ref({
+    id: 0,
     name: "",
 });
 
-const handleSubmit = async (data) => {
-    await createAuthor(data);
+const handleSubmit = async (data: Author) => {
+    await createAuthor(data as Author);
     router.push({ name: "authors.overview" });
 };
 </script>

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ref, computed } from "vue";
 import { Book, fetchBooks, getAllBooks } from "../books/store";
 import {
@@ -23,21 +22,26 @@ export const getAuthorById = (id: Number) =>
 
 // actions
 export const fetchAuthors = async () => {
-    const { data } = await getRequest("/authors");
+    const { data } = await getRequest<{ data: Author[] }>("/authors");
     if (!data) return;
     authors.value = data.data;
 };
 
 export const createAuthor = async (newAuthor: Author) => {
-    const { data } = await postRequest("/authors", newAuthor);
+    const { data } = await postRequest<{ data: Author }>("/authors", newAuthor);
     if (!data) return;
-    authors.value = data.data;
+    authors.value = [...authors.value, data.data];
 };
 
 export const updateAuthor = async (id: Number, updatedAuthor: Author) => {
-    const { data } = await putRequest(`/authors/${id}`, updatedAuthor);
+    const { data } = await putRequest<{ data: Author }>(
+        `/authors/${id}`,
+        updatedAuthor
+    );
     if (!data) return;
-    authors.value = data.data;
+    authors.value = authors.value.map((author) =>
+        author.id === id ? data.data : author
+    );
 };
 
 export const deleteAuthor = async (id: Number) => {

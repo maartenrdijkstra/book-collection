@@ -9,12 +9,14 @@
         <tr v-for="book in books" :key="book.id">
             <td>{{ book.title }}</td>
             <td>{{ book.summary }}</td>
-            <td>{{ book.author.name ?? "Onbekend" }}</td>
+            <td>{{ book.author?.name ?? "Onbekend" }}</td>
             <td>
-                <RouterLink
-                    :to="{ name: 'books.edit', params: { id: book.id } }"
-                    >Bewerk</RouterLink
-                >
+                <template v-if="book.id">
+                    <RouterLink
+                        :to="{ name: 'books.edit', params: { id: book.id } }"
+                        >Bewerk</RouterLink
+                    >
+                </template>
             </td>
             <td><button @click="deleteBook(book.id)">Verwijder</button></td>
         </tr>
@@ -24,11 +26,10 @@
 <script setup lang="ts">
 import { Author } from "../../authors/store";
 import { fetchBooks, getAllBooks, deleteBook, Book } from "../store";
-import { onMounted, ref } from "vue";
+import { ComputedRef, onMounted, ref } from "vue";
 
 fetchBooks();
-const books: Book[] = getAllBooks.value;
-const author = ref<Author | null>(null);
+const books: ComputedRef = getAllBooks;
 </script>
 
 <style>
