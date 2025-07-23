@@ -6,7 +6,7 @@
             <th>Author</th>
             <th colspan="2">Actions</th>
         </tr>
-        <tr v-for="book in getAllBooks" :key="book.id">
+        <tr v-for="book in books" :key="book.id">
             <td>{{ book.title }}</td>
             <td>{{ book.summary }}</td>
             <td>{{ book.author.name ?? "Onbekend" }}</td>
@@ -21,11 +21,14 @@
     </table>
 </template>
 
-<script setup>
-import { fetchBooks, getAllBooks, deleteBook } from "../store";
-import { onMounted } from "vue";
+<script setup lang="ts">
+import { Author } from "../../authors/store";
+import { fetchBooks, getAllBooks, deleteBook, Book } from "../store";
+import { onMounted, ref } from "vue";
 
 fetchBooks();
+const books: Book[] = getAllBooks.value;
+const author = ref<Author | null>(null);
 </script>
 
 <style>

@@ -7,7 +7,7 @@
 
 <script setup>
 import Form from "./components/Form.vue";
-import { Author, createAuthor, fetchAuthors } from "../store";
+import { createAuthor, fetchAuthors } from "../store";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 

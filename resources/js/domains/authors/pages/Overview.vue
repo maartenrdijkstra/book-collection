@@ -2,7 +2,7 @@
     <table>
         <tr>
             <th>Name</th>
-            <th>Actions</th>
+            <th colspan="2">Actions</th>
         </tr>
         <tr v-for="author in getAllAuthors" :key="author.id">
             <td>{{ author.name }}</td>
@@ -12,12 +12,13 @@
                     >Bewerk</RouterLink
                 >
             </td>
+            <td><button @click="deleteAuthor(author.id)">Verwijder</button></td>
         </tr>
     </table>
 </template>
 
 <script setup>
-import { fetchAuthors, getAllAuthors } from "../store";
+import { deleteAuthor, fetchAuthors, getAllAuthors } from "../store";
 import { onMounted } from "vue";
 
 fetchAuthors();

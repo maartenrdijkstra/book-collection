@@ -28,6 +28,11 @@ class AuthorController extends Controller
     }
 
      public function destroy(Author $author) {
+        if ($author->books()->exists()) {
+        return response()->json([
+            'message' => 'Auteur kan niet worden verwijderd omdat er boeken aan gekoppeld zijn.'
+        ], 400); // Bad Request
+    }
         $author->delete();
         return response()->json(['message' => 'Auteur succesvol verwijderd']);
     }

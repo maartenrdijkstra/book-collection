@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Auteur bewerken</h2>
-        <Form v-if="author" :author="author.value" @submit="handleSubmit" />
+        <Form v-if="author" :author="author" @submit="handleSubmit" />
     </div>
 </template>
 
@@ -20,6 +20,6 @@ const author = getAuthorById(route.params.id);
 
 const handleSubmit = async (data) => {
     await updateAuthor(route.params.id, data);
-    router.push({ name: "author.overview" });
+    router.push({ name: "authors.overview" });
 };
 </script>

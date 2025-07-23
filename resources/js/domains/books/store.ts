@@ -1,18 +1,14 @@
 import axios from "axios";
 import { ref, computed } from "vue";
 
-export class Book {
-    constructor(
-        public id: number,
-        public title: string,
-        public summary: string,
-        public author_id: number
-    ) {}
+export interface Book {
+    id: number;
+    title: string;
+    summary: string;
+    author_id: number;
 }
 // state
 const books = ref([]);
-
-await axios.get("/sanctum/csrf-cookie");
 
 // getters
 export const getAllBooks = computed(() => books.value);

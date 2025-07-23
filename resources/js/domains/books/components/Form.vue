@@ -9,7 +9,7 @@
         <label>Auteur:</label>
         <select v-model="form.author_id" required>
             <option
-                v-for="author in getAllAuthors"
+                v-for="author in authors"
                 :key="author.id"
                 :value="author.id"
             >
@@ -21,14 +21,16 @@
     </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
-import { fetchAuthors, getAllAuthors } from "../../authors/store";
+import { Author, fetchAuthors, getAllAuthors } from "../../authors/store";
 import { Book } from "../store";
 
 fetchAuthors();
 
-const props = defineProps({ book: Book });
+const authors: Author[] = getAllAuthors.value;
+
+const props = defineProps<{ book: Book }>();
 
 const emit = defineEmits(["submit"]);
 
