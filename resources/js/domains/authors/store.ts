@@ -1,6 +1,12 @@
 import axios from "axios";
 import { ref, computed } from "vue";
 import { Book, fetchBooks, getAllBooks } from "../books/store";
+import {
+    deleteRequest,
+    getRequest,
+    postRequest,
+    putRequest,
+} from "../../services";
 
 // state
 const authors = ref<Author[]>([]);
@@ -17,21 +23,19 @@ export const getAuthorById = (id: Number) =>
 
 // actions
 export const fetchAuthors = async () => {
-    const { data } = await axios.get("/api/authors");
+    const { data } = await getRequest("/authors");
     if (!data) return;
     authors.value = data.data;
 };
 
 export const createAuthor = async (newAuthor: Author) => {
-    const { data } = await axios.post("/api/authors", newAuthor, {
-        withCredentials: true,
-    });
+    const { data } = await postRequest("/authors", newAuthor);
     if (!data) return;
     authors.value = data.data;
 };
 
 export const updateAuthor = async (id: Number, updatedAuthor: Author) => {
-    const { data } = await axios.put(`/api/authors/${id}`, updatedAuthor);
+    const { data } = await putRequest(`/authors/${id}`, updatedAuthor);
     if (!data) return;
     authors.value = data.data;
 };
@@ -45,7 +49,7 @@ export const deleteAuthor = async (id: Number) => {
     if (author && books.some((book) => book["id"] === author.id)) {
         throw new Error("Cannot delete author with associated books.");
     } else {
-        await axios.delete(`/api/authors/${id}`);
+        await deleteRequest(`/authors/${id}`);
         authors.value = authors.value.filter((author) => author["id"] !== id);
     }
 };

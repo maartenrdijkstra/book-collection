@@ -7,9 +7,9 @@
         <textarea v-model="form.summary" required></textarea>
 
         <label>Auteur:</label>
-        <select v-model="form.author_id" required>
+        <select v-model.number="form.author_id" required>
             <option
-                v-for="author in authors"
+                v-for="author in getAllAuthors"
                 :key="author.id"
                 :value="author.id"
             >
@@ -27,8 +27,6 @@ import { Author, fetchAuthors, getAllAuthors } from "../../authors/store";
 import { Book } from "../store";
 
 fetchAuthors();
-
-const authors: Author[] = getAllAuthors.value;
 
 const props = defineProps<{ book: Book }>();
 
