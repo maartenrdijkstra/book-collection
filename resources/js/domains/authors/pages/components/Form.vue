@@ -1,5 +1,5 @@
 <template>
-    <form :author="author" @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit">
         <label>Auteur:</label>
         <input v-model="form.name" type="text" required />
 
@@ -9,9 +9,7 @@
 
 <script setup lang="ts">
 import { ref, defineProps, defineEmits } from "vue";
-import { fetchAuthors, Author } from "../../store";
-
-fetchAuthors();
+import { Author } from "../../store";
 
 const props = defineProps<{ author: Author }>();
 

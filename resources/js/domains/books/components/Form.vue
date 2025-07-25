@@ -9,7 +9,7 @@
         <label>Auteur:</label>
         <select v-model.number="form.author_id" required>
             <option
-                v-for="author in getAllAuthors"
+                v-for="author in authors"
                 :key="author.id"
                 :value="author.id"
             >
@@ -22,11 +22,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { fetchAuthors, getAllAuthors } from "../../authors/store";
+import { ComputedRef, ref } from "vue";
 import { Book } from "../store";
+import { storeModuleFactory } from "../../../services/store";
 
-fetchAuthors();
+const authorStore = storeModuleFactory("authors");
+
+authorStore.actions.getAll();
+
+const authors: ComputedRef = authorStore.getters.all;
 
 const props = defineProps<{ book: Book }>();
 

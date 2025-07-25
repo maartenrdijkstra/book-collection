@@ -1,5 +1,6 @@
-// @ts-nocheck
+//@ts-nocheck
 import { ref, computed } from "vue";
+import { getRequest, postRequest, putRequest, deleteRequest } from ".."; // Assuming these functions are defined in httpService.js
 
 export const storeModuleFactory = (moduleName) => {
     const state = ref({});
@@ -11,11 +12,12 @@ export const storeModuleFactory = (moduleName) => {
 
     const setters = {
         setAll: (items) => {
+            items = items.data;
             for (const item of items)
                 state.value[item.id] = Object.freeze(item);
         },
         deleteByItem: (item) => {
-            delete state.value[item.id];
+            delete state.value[item];
         },
     };
 
@@ -40,5 +42,6 @@ export const storeModuleFactory = (moduleName) => {
             setters.deleteByItem(id);
         },
     };
+
     return { getters, setters, actions };
 };

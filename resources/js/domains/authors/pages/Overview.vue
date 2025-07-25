@@ -20,8 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import { deleteAuthor, fetchAuthors, getAllAuthors } from "../store";
+import { ComputedRef } from "vue";
+import { storeModuleFactory } from "../../../services/store";
 
-fetchAuthors();
-const authors = getAllAuthors;
+const authorStore = storeModuleFactory("authors");
+authorStore.actions.getAll();
+const authors: ComputedRef = authorStore.getters.all;
+const deleteAuthor = async (id: number) => {
+    await authorStore.actions.delete(id);
+    authorStore.actions.getAll(); // Refresh the list after deletion
+};
 </script>

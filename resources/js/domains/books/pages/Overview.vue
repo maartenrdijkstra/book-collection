@@ -24,11 +24,19 @@
 </template>
 
 <script setup lang="ts">
-import { fetchBooks, getAllBooks, deleteBook, Book } from "../store";
 import { ComputedRef } from "vue";
+import { storeModuleFactory } from "../../../services/store";
 
-fetchBooks();
-const books: ComputedRef = getAllBooks;
+const bookStore = storeModuleFactory("books");
+
+bookStore.actions.getAll();
+
+const books: ComputedRef = bookStore.getters.all;
+
+const deleteBook = async (id: number) => {
+    await bookStore.actions.delete(id);
+    bookStore.actions.getAll(); // Refresh the list after deletion
+};
 </script>
 
 <style>

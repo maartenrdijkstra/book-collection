@@ -6,32 +6,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import Form from "./components/Form.vue";
-import { Author, fetchAuthors, getAuthorById, updateAuthor } from "../store";
+import { storeModuleFactory } from "../../../services/store";
+import { Author } from "../store";
+import Form from "../pages/components/Form.vue";
 
 const route = useRoute();
 const router = useRouter();
 
-fetchAuthors();
+const authorStore = storeModuleFactory("authors");
 
-const author = ref<Author>({
-    id: 0,
-    name: "",
-});
+authorStore.actions.getAll();
 
-const authorById = getAuthorById(Number(route.params.id)).value;
+const author = authorStore.getters.getById(Number(route.params.id));
 
-if (authorById) {
-    author.value = authorById;
-} else {
-    // fallback of error-afhandeling
-    author.value = { id: 0, name: "Onbekend" };
-}
+console.log(author);
 
 const handleSubmit = async (data: Author) => {
-    await updateAuthor(Number(route.params.id), data);
+    await authorStore.actions.update(Number(route.params.id), data);
     router.push({ name: "authors.overview" });
 };
 </script>
