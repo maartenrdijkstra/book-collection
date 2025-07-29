@@ -18,6 +18,15 @@ class ReviewResource extends JsonResource
             'id' => $this->id,
             'stars' => $this->stars,
             'text' => $this->text,
+            'book' => [
+                'id' => $this->book?->id,
+                'title' => $this->book?->title,
+                'summary' => $this->book?->summary,
+                'author' => [
+                    'id' => $this->book?->author?->id,
+                    'name' => $this->book?->author?->name,
+                ],
+            ],
         ];
     }
 }

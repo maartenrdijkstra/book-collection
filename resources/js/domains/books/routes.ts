@@ -4,6 +4,7 @@ import Overview from "./pages/Overview.vue";
 import Create from "./pages/Create.vue";
 // @ts-ignore
 import Edit from "./pages/Edit.vue";
+import Show from "./pages/Show.vue";
 
 export const bookRoutes = [
     {
@@ -20,5 +21,10 @@ export const bookRoutes = [
         path: "/books/:id/edit",
         component: Edit,
         name: "books.edit",
+    },
+    {
+        path: "/books/:id/show",
+        component: Show,
+        name: "books.show",
     },
 ];

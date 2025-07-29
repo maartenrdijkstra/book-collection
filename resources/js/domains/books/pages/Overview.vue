@@ -2,14 +2,20 @@
     <table>
         <tr>
             <th>Title</th>
-            <th>Summary</th>
             <th>Author</th>
-            <th colspan="2">Actions</th>
+            <th colspan="3">Actions</th>
         </tr>
         <tr v-for="book in books" :key="book.id">
             <td>{{ book.title }}</td>
-            <td>{{ book.summary }}</td>
             <td>{{ book.author.name ?? "Onbekend" }}</td>
+            <td>
+                <template v-if="book.id">
+                    <RouterLink
+                        :to="{ name: 'books.show', params: { id: book.id } }"
+                        >Show</RouterLink
+                    >
+                </template>
+            </td>
             <td>
                 <template v-if="book.id">
                     <RouterLink

@@ -17,7 +17,9 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'content' => $this->faker->paragraphs(3, true),
+            'reviewer' => $this->faker->word,
+            'stars' => $this->faker->numberBetween(1, 5),
+            'content' => $this->faker->paragraph(3, true),
             'book_id' => \App\Models\Book::factory(),
         ];
     }
