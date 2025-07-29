@@ -1,11 +1,15 @@
 <template>
+    <ErrorMessage />
+
     <form @submit.prevent="handleSubmit">
         <label>Titel:</label>
         <input v-model="form.title" type="text" required />
 
+        <FormError name="title" />
         <label>Samenvatting:</label>
         <textarea v-model="form.summary" required></textarea>
 
+        <FormError name="summary" />
         <label>Auteur:</label>
         <select v-model="form.author_id" required>
             <option
@@ -16,6 +20,7 @@
                 {{ author.name }}
             </option>
         </select>
+        <FormError name="author" />
 
         <button type="submit">Opslaan</button>
     </form>
