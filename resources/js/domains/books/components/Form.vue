@@ -7,7 +7,7 @@
         <textarea v-model="form.summary" required></textarea>
 
         <label>Auteur:</label>
-        <select v-model.number="form.author_id" required>
+        <select v-model="form.author_id" required>
             <option
                 v-for="author in authors"
                 :key="author.id"
@@ -35,7 +35,9 @@ const authors: ComputedRef = authorStore.getters.all;
 const props = defineProps<{ book: Book }>();
 
 const emit = defineEmits(["submit"]);
-const form = ref({ ...props.book });
-
+const form = ref({
+    ...props.book,
+    author_id: props.book.author.id,
+});
 const handleSubmit = () => emit("submit", form.value);
 </script>

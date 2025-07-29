@@ -9,6 +9,7 @@ dit is de hele file: books/Edit.vue:
 
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
+//@ts-ignore
 import Form from "../components/Form.vue";
 import { storeModuleFactory } from "../../../services/store";
 import { Book } from "../store";
