@@ -8,3 +8,13 @@ export interface Book {
 }
 
 export const bookStore = storeModuleFactory("books");
+
+export interface Review {
+    id: number;
+    reviewer: string;
+    stars: number;
+    content: string;
+    book_id: number;
+}
+
+export const reviewStore = storeModuleFactory("reviews");

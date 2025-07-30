@@ -49,7 +49,7 @@ const books = bookStore.getters.all;
 
 const deleteBook = async (id: number) => {
     await bookStore.actions.delete(id);
-    bookStore.actions.getAll(); // Refresh the list after deletion
+    bookStore.actions.getAll();
 };
 </script>
 

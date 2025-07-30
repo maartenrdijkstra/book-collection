@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { ComputedRef } from "vue";
 import { ref } from "vue";
 import { authorStore } from "../store";
 import ErrorMessage from "../../../ErrorMessage.vue";

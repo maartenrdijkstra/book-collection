@@ -1,8 +1,5 @@
-// @ts-ignore
 import Overview from "./pages/Overview.vue";
-// @ts-ignore
 import Create from "./pages/Create.vue";
-// @ts-ignore
 import Edit from "./pages/Edit.vue";
 import Show from "./pages/Show.vue";
 

@@ -11,7 +11,7 @@ class Review extends Model
     
          protected $fillable = ['reviewer', 'stars', 'content', 'book_id'];
 
-    public function review() {
-        return $this->belongsTo(Review::class);
+    public function books() {
+        return $this->belongsTo(Book::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Book;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +18,10 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'reviewer' => $this->faker->word,
+            'reviewer' => $this->faker->name,
             'stars' => $this->faker->numberBetween(1, 5),
             'content' => $this->faker->paragraph(3, true),
-            'book_id' => \App\Models\Book::factory(),
+            'book_id' => rand(1, Book::count())
         ];
     }
 }

@@ -1,10 +1,14 @@
 <template>
     <div v-if="book">
-        <h2>{{ book.title }} by {{ book.author.name }}</h2>
+        <h2>
+            {{ book.title }} by
+            {{ authorStore.getters.getById(book.author_id).value?.name }}
+        </h2>
         <h4>Samenvatting</h4>
         <p>{{ book.summary }}</p>
         <h4>Reviews</h4>
     </div>
+
     <div v-else>
         <h2>Loading...</h2>
     </div>
@@ -13,13 +17,22 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
 import { storeModuleFactory } from "../../../services/store";
+import { bookStore, reviewStore } from "../store";
+import { authorStore } from "../../authors/store";
 
 const route = useRoute();
 const router = useRouter();
 
-const bookStore = storeModuleFactory("books");
+authorStore.actions.getAll();
 bookStore.actions.getAll();
+reviewStore.actions.getAll();
+
 const book = bookStore.getters.getById(Number(route.params.id));
+const reviews = reviewStore.getters.all;
+const authors = authorStore.getters.all;
+
+console.log(reviews.value);
+console.log(authors.value);
 </script>
 
 <style scoped>
