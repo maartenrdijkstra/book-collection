@@ -8,15 +8,11 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
 import { storeModuleFactory } from "../../../services/store";
-import { Author } from "../store";
+import { Author, authorStore } from "../store";
 import Form from "../pages/components/Form.vue";
 
 const route = useRoute();
 const router = useRouter();
-
-const authorStore = storeModuleFactory("authors");
-
-authorStore.actions.getAll();
 
 const author = authorStore.getters.getById(Number(route.params.id));
 

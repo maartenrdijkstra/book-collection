@@ -1,9 +1,10 @@
-import { Author } from "../authors/store";
+import { storeModuleFactory } from "../../services/store";
 
 export interface Book {
     id: number;
     title: string;
     summary: string;
     author_id: number;
-    author: Author;
 }
+
+export const bookStore = storeModuleFactory("books");

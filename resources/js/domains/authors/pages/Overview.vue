@@ -22,25 +22,18 @@
 
 <script setup lang="ts">
 import { ComputedRef } from "vue";
-import { storeModuleFactory } from "../../../services/store";
 import { ref } from "vue";
+import { authorStore } from "../store";
 
-const authorStore = storeModuleFactory("authors");
 authorStore.actions.getAll();
 const authors: ComputedRef = authorStore.getters.all;
 
 let message = ref<string>("");
 const deleteAuthor = async (id: number) => {
     try {
-        message.value = "";
         await authorStore.actions.delete(id);
-        authorStore.actions.getAll();
     } catch (error: any) {
-        if (error.response?.status === 422) {
-            message.value = error.response.data.message;
-        } else {
-            message.value = "Er ging iets mis bij het verwijderen.";
-        }
+        message.value = error.response.data.message;
     }
 };
 </script>

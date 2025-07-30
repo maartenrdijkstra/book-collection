@@ -1,6 +1,5 @@
-//@ts-nocheck
 import { ref, computed } from "vue";
-import { getRequest, postRequest, putRequest, deleteRequest } from "../http"; // Assuming these functions are defined in httpService.js
+import { getRequest, postRequest, putRequest, deleteRequest } from "../http";
 
 export const storeModuleFactory = (moduleName) => {
     const state = ref({});

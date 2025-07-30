@@ -1,5 +1,3 @@
-dit is de hele file: books/Edit.vue:
-
 <template>
     <div>
         <h2>Boek bewerken</h2>
@@ -9,17 +7,11 @@ dit is de hele file: books/Edit.vue:
 
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-//@ts-ignore
 import Form from "../components/Form.vue";
-import { storeModuleFactory } from "../../../services/store";
-import { Book } from "../store";
+import { Book, bookStore } from "../store";
 
 const route = useRoute();
 const router = useRouter();
-
-const bookStore = storeModuleFactory("books");
-
-bookStore.actions.getAll();
 
 const book = bookStore.getters.getById(Number(route.params.id));
 

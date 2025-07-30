@@ -29,9 +29,9 @@
 <script setup lang="ts">
 import { ComputedRef, ref } from "vue";
 import { Book } from "../store";
-import { storeModuleFactory } from "../../../services/store";
-
-const authorStore = storeModuleFactory("authors");
+import { authorStore } from "../../authors/store";
+import ErrorMessage from "../../../ErrorMessage.vue";
+import FormError from "../../../FormError.vue";
 
 authorStore.actions.getAll();
 
@@ -42,7 +42,6 @@ const props = defineProps<{ book: Book }>();
 const emit = defineEmits(["submit"]);
 const form = ref({
     ...props.book,
-    author_id: props.book.author.id,
 });
 const handleSubmit = () => emit("submit", form.value);
 </script>

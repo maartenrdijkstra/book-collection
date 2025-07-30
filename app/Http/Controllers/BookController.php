@@ -27,7 +27,7 @@ class BookController extends Controller {
     }
 
     public function destroy(Book $book) {
-    $book->delete();
-    return response()->json(['message' => 'Boek succesvol verwijderd']);
-}
+        $book->delete();
+        return response()->json(['message' => 'Boek succesvol verwijderd']);
+    }
 }

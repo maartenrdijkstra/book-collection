@@ -31,9 +31,7 @@
 
 <script setup lang="ts">
 import { ComputedRef } from "vue";
-import { storeModuleFactory } from "../../../services/store";
-
-const bookStore = storeModuleFactory("books");
+import { bookStore } from "../store";
 
 bookStore.actions.getAll();
 

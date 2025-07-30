@@ -27,12 +27,4 @@ class StoreAuthorRequest extends FormRequest
             'name' => 'required|string|max:255',
         ];
     }
-
-    
-    public function store(StoreAuthorRequest $request) {
-        $author = Author::create($request->validated());
-
-        $authors = Author::all();
-        return AuthorResource::collection($authors);
-    }
 }

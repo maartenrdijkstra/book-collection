@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-//@ts-ignore
 import Form from "../components/Form.vue";
 import { Book } from "../store";
 import { Author } from "../../authors/store";
@@ -21,7 +20,6 @@ const book = ref<Book>({
     title: "",
     summary: "",
     author_id: 0,
-    author: { id: 0, name: "" },
 });
 
 const handleSubmit = async (data: Book) => {
