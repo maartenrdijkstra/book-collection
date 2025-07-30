@@ -31,7 +31,7 @@ import { ComputedRef, ref } from "vue";
 import { Book } from "../store";
 import { authorStore } from "../../authors/store";
 import ErrorMessage from "../../../ErrorMessage.vue";
-import FormError from "../../../FormError.vue";
+import FormError from "../../authors/pages/components/FormError.vue";
 
 authorStore.actions.getAll();
 

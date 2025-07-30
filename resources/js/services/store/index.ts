@@ -11,7 +11,6 @@ export const storeModuleFactory = (moduleName) => {
 
     const setters = {
         setAll: (items) => {
-            items = items.data;
             for (const item of items)
                 state.value[item.id] = Object.freeze(item);
         },

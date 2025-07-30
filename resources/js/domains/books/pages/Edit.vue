@@ -13,6 +13,8 @@ import { Book, bookStore } from "../store";
 const route = useRoute();
 const router = useRouter();
 
+bookStore.actions.getAll();
+
 const book = bookStore.getters.getById(Number(route.params.id));
 
 const handleSubmit = async (data: Book) => {

@@ -14,6 +14,7 @@ import Form from "../pages/components/Form.vue";
 const route = useRoute();
 const router = useRouter();
 
+authorStore.actions.getAll();
 const author = authorStore.getters.getById(Number(route.params.id));
 
 const handleSubmit = async (data: Author) => {

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller {
     public function index() {
-        return BookResource::collection(Book::with('author')->get());
+        return BookResource::collection(Book::all());
     }
 
     public function store(StoreBookRequest $request) {

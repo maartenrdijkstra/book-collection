@@ -1,5 +1,5 @@
 <template>
-    <p class="error-msg" v-if="message">{{ message }}</p>
+    <ErrorMessage />
     <table>
         <tr>
             <th>Name</th>
@@ -9,7 +9,6 @@
             <td>{{ author.name }}</td>
             <td>
                 <RouterLink
-                    v-if="author && author.id"
                     :to="{ name: 'authors.edit', params: { id: author.id } }"
                 >
                     Bewerken
@@ -24,24 +23,13 @@
 import { ComputedRef } from "vue";
 import { ref } from "vue";
 import { authorStore } from "../store";
+import ErrorMessage from "../../../ErrorMessage.vue";
 
 authorStore.actions.getAll();
-const authors: ComputedRef = authorStore.getters.all;
+const authors = authorStore.getters.all;
 
-let message = ref<string>("");
+const message = ref("");
 const deleteAuthor = async (id: number) => {
-    try {
-        await authorStore.actions.delete(id);
-    } catch (error: any) {
-        message.value = error.response.data.message;
-    }
+    await authorStore.actions.delete(id);
 };
 </script>
-
-<style>
-.error-msg {
-    color: red;
-    font-weight: bold;
-    margin: 1rem;
-}
-</style>

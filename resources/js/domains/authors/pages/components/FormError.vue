@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { getErrorByProperty } from "./services/error";
+import { getErrorByProperty } from "../../../../services/error";
 
 defineProps<{ name: string }>();
 </script>

@@ -1,41 +1,51 @@
 <template>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th colspan="3">Actions</th>
-        </tr>
-        <tr v-for="book in books" :key="book.id">
-            <td>{{ book.title }}</td>
-            <td>{{ book.author.name ?? "Onbekend" }}</td>
-            <td>
-                <template v-if="book.id">
+    <div>
+        <table v-if="books">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th colspan="3">Actions</th>
+            </tr>
+            <tr v-for="book in books" :key="book.id">
+                <td>{{ book.title }}</td>
+                <td>
+                    {{
+                        authorStore.getters.getById(book.author_id).value?.name
+                    }}
+                </td>
+                <td>
                     <RouterLink
-                        :to="{ name: 'books.show', params: { id: book.id } }"
+                        :to="{
+                            name: 'books.show',
+                            params: { id: book.id },
+                        }"
                         >Show</RouterLink
                     >
-                </template>
-            </td>
-            <td>
-                <template v-if="book.id">
+                </td>
+                <td>
                     <RouterLink
-                        :to="{ name: 'books.edit', params: { id: book.id } }"
+                        :to="{
+                            name: 'books.edit',
+                            params: { id: book.id },
+                        }"
                         >Bewerk</RouterLink
                     >
-                </template>
-            </td>
-            <td><button @click="deleteBook(book.id)">Verwijder</button></td>
-        </tr>
-    </table>
+                </td>
+                <td><button @click="deleteBook(book.id)">Verwijder</button></td>
+            </tr>
+        </table>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ComputedRef } from "vue";
-import { bookStore } from "../store";
+import { ComputedRef, ref } from "vue";
+import { Book, bookStore } from "../store";
+import { authorStore, Author } from "../../authors/store";
 
 bookStore.actions.getAll();
+authorStore.actions.getAll();
 
-const books: ComputedRef = bookStore.getters.all;
+const books = bookStore.getters.all;
 
 const deleteBook = async (id: number) => {
     await bookStore.actions.delete(id);
