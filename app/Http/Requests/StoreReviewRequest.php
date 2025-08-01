@@ -23,7 +23,7 @@ class StoreReviewRequest extends BaseFormRequest
             'reviewer' => 'required|string|max:255',
             'stars' => 'required|integer|min:1|max:5',
             'content' => 'required|string',
-            'book_id' => 'required|exists:book,id'
+            'book_id' => 'required|exists:books,id'
         ];
     }
 }

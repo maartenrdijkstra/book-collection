@@ -2,6 +2,7 @@ import Overview from "./pages/Overview.vue";
 import Create from "./pages/Create.vue";
 import Edit from "./pages/Edit.vue";
 import Show from "./pages/Show.vue";
+import EditReview from "./pages/EditReview.vue";
 
 export const bookRoutes = [
     {
@@ -23,5 +24,10 @@ export const bookRoutes = [
         path: "/books/:id/show",
         component: Show,
         name: "books.show",
+    },
+    {
+        path: "/reviews/:id",
+        component: EditReview,
+        name: "reviews.edit",
     },
 ];

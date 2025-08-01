@@ -5,7 +5,7 @@ export const storeModuleFactory = (moduleName) => {
     const state = ref({});
 
     const getters = {
-        all: computed(() => state.value),
+        all: computed(() => Object.values(state.value)),
         getById: (id) => computed(() => state.value[id]),
     };
 

@@ -6,7 +6,88 @@
         </h2>
         <h4>Samenvatting</h4>
         <p>{{ book.summary }}</p>
+
+        <button>Maak Nieuwe Review</button>
+        <form @submit="postReview(review)">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <label for="reviewer">Reviewer</label>
+                        </th>
+                        <th>
+                            <label for="stars">Stars</label>
+                        </th>
+                        <th>
+                            <label for="content">Content</label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input
+                                v-model="review.reviewer"
+                                id="reviewer"
+                                type="text"
+                                placeholder="John Smith"
+                                required
+                            />
+                        </td>
+                        <td>
+                            <input
+                                v-model="review.stars"
+                                id="stars"
+                                type="number"
+                                min="1"
+                                max="5"
+                                step="1"
+                                required
+                                value="3"
+                            />
+                        </td>
+                        <td>
+                            <textarea
+                                v-model="review.content"
+                                id="content"
+                                type="text"
+                                cols="120"
+                                rows="4"
+                                placeholder="Best book ever"
+                                required
+                            ></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td colspan="3">
+                        <button type="submit">Voeg toe</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
         <h4>Reviews</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Reviewer</th>
+                    <th>Stars</th>
+                    <th>Content</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="review in filteredReviews" :key="review.id">
+                    <td>{{ review.reviewer }}</td>
+                    <td>{{ review.stars }}</td>
+                    <td>{{ review.content }}</td>
+                    <td>
+                        <button @click="updateReview(review)">Update</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div v-else>
@@ -17,8 +98,10 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
 import { storeModuleFactory } from "../../../services/store";
-import { bookStore, reviewStore } from "../store";
+import { bookStore, Review, reviewStore } from "../store";
 import { authorStore } from "../../authors/store";
+import { computed, Ref } from "vue";
+import { ref } from "vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -31,8 +114,32 @@ const book = bookStore.getters.getById(Number(route.params.id));
 const reviews = reviewStore.getters.all;
 const authors = authorStore.getters.all;
 
-console.log(reviews.value);
-console.log(authors.value);
+const review = ref({
+    id: 0,
+    reviewer: "",
+    stars: 3,
+    content: "",
+    book_id: 0,
+});
+
+const filteredReviews = computed(() =>
+    reviews.value.filter(({ book_id }) => book_id === Number(route.params.id))
+);
+
+const postReview = async (data: Review) => {
+    const review: Review = {
+        book_id: Number(route.params.id),
+        reviewer: data.reviewer,
+        stars: data.stars,
+        content: data.content,
+    };
+    console.log(review);
+    await storeModuleFactory("reviews").actions.create(review);
+};
+
+const updateReview = () => {
+    // @TODO: voeg hier een link toe naar reviews/{review.id}
+};
 </script>
 
 <style scoped>
