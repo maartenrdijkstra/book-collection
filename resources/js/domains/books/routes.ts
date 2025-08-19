@@ -2,7 +2,7 @@ import Overview from "./pages/Overview.vue";
 import Create from "./pages/Create.vue";
 import Edit from "./pages/Edit.vue";
 import Show from "./pages/Show.vue";
-import EditReview from "./pages/EditReview.vue";
+import EditReview from "../reviews/pages/Edit.vue";
 
 export const bookRoutes = [
     {

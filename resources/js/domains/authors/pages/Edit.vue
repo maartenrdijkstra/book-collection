@@ -7,7 +7,6 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-import { storeModuleFactory } from "../../../services/store";
 import { Author, authorStore } from "../store";
 import Form from "../pages/components/Form.vue";
 

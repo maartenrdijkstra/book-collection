@@ -83,7 +83,9 @@
                     <td>{{ review.stars }}</td>
                     <td>{{ review.content }}</td>
                     <td>
-                        <button @click="updateReview(review)">Update</button>
+                        <router-link :to="`/reviews/${review.id}`">
+                            <button>Update review</button>
+                        </router-link>
                     </td>
                 </tr>
             </tbody>
