@@ -27,7 +27,6 @@ import ErrorMessage from "../../../ErrorMessage.vue";
 authorStore.actions.getAll();
 const authors = authorStore.getters.all;
 
-const message = ref("");
 const deleteAuthor = async (id: number) => {
     await authorStore.actions.delete(id);
 };

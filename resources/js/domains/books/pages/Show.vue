@@ -68,7 +68,6 @@
         </form>
 
         <h4>Reviews</h4>
-        <ErrorMessage />
         <table>
             <thead>
                 <tr>
@@ -109,7 +108,6 @@ import { storeModuleFactory } from "../../../services/store";
 import { bookStore, Review, reviewStore } from "../store";
 import { authorStore } from "../../authors/store";
 import { computed, ref } from "vue";
-import ErrorMessage from "../../../ErrorMessage.vue";
 
 const route = useRoute();
 const router = useRouter();
