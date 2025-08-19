@@ -74,7 +74,7 @@
                     <th>Reviewer</th>
                     <th>Stars</th>
                     <th>Content</th>
-                    <th>Actions</th>
+                    <th colspan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,6 +86,11 @@
                         <router-link :to="`/reviews/${review.id}`">
                             <button>Update review</button>
                         </router-link>
+                    </td>
+                    <td>
+                        <button @click="deleteReview(review.id)">
+                            Verwijder
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -114,7 +119,6 @@ reviewStore.actions.getAll();
 
 const book = bookStore.getters.getById(Number(route.params.id));
 const reviews = reviewStore.getters.all;
-const authors = authorStore.getters.all;
 
 const review = ref({
     id: 0,
@@ -139,8 +143,9 @@ const postReview = async (data: Review) => {
     await storeModuleFactory("reviews").actions.create(review);
 };
 
-const updateReview = () => {
-    // @TODO: voeg hier een link toe naar reviews/{review.id}
+const deleteReview = async (id: number) => {
+    await reviewStore.actions.delete(id);
+    reviewStore.actions.getAll();
 };
 </script>
 
