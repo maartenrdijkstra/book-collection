@@ -1,4 +1,5 @@
 <template>
+    <ErrorMessage />
     <div>
         <table v-if="books">
             <tr>
@@ -38,9 +39,9 @@
 </template>
 
 <script setup lang="ts">
-import { ComputedRef, ref } from "vue";
 import { Book, bookStore } from "../store";
-import { authorStore, Author } from "../../authors/store";
+import { authorStore } from "../../authors/store";
+import ErrorMessage from "../../../ErrorMessage.vue";
 
 bookStore.actions.getAll();
 authorStore.actions.getAll();
