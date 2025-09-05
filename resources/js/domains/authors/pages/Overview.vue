@@ -1,21 +1,30 @@
 <template>
     <ErrorMessage />
     <table>
-        <tr>
-            <th>Name</th>
-            <th colspan="2">Actions</th>
-        </tr>
-        <tr v-for="author in authors" :key="author.id">
-            <td>{{ author.name }}</td>
-            <td>
-                <RouterLink
-                    :to="{ name: 'authors.edit', params: { id: author.id } }"
-                >
-                    Bewerken
-                </RouterLink>
-            </td>
-            <td><button @click="deleteAuthor(author.id)">Verwijder</button></td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="author in authors" :key="author.id">
+                <td>{{ author.name }}</td>
+                <td>
+                    <RouterLink
+                        :to="{
+                            name: 'authors.edit',
+                            params: { id: author.id },
+                        }"
+                    >
+                        Bewerken
+                    </RouterLink>
+                </td>
+                <td>
+                    <button @click="deleteAuthor(author.id)">Verwijder</button>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </template>
 

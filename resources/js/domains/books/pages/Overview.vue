@@ -2,38 +2,45 @@
     <ErrorMessage />
     <div>
         <table v-if="books">
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th colspan="3">Actions</th>
-            </tr>
-            <tr v-for="book in books" :key="book.id">
-                <td>{{ book.title }}</td>
-                <td>
-                    {{
-                        authorStore.getters.getById(book.author_id).value?.name
-                    }}
-                </td>
-                <td>
-                    <RouterLink
-                        :to="{
-                            name: 'books.show',
-                            params: { id: book.id },
-                        }"
-                        >Show</RouterLink
-                    >
-                </td>
-                <td>
-                    <RouterLink
-                        :to="{
-                            name: 'books.edit',
-                            params: { id: book.id },
-                        }"
-                        >Bewerk</RouterLink
-                    >
-                </td>
-                <td><button @click="deleteBook(book.id)">Verwijder</button></td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th colspan="3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="book in books" :key="book.id">
+                    <td>{{ book.title }}</td>
+                    <td>
+                        {{
+                            authorStore.getters.getById(book.author_id).value
+                                ?.name
+                        }}
+                    </td>
+                    <td>
+                        <RouterLink
+                            :to="{
+                                name: 'books.show',
+                                params: { id: book.id },
+                            }"
+                            >Show</RouterLink
+                        >
+                    </td>
+                    <td>
+                        <RouterLink
+                            :to="{
+                                name: 'books.edit',
+                                params: { id: book.id },
+                            }"
+                            >Bewerk</RouterLink
+                        >
+                    </td>
+                    <td>
+                        <button @click="deleteBook(book.id)">Verwijder</button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </template>

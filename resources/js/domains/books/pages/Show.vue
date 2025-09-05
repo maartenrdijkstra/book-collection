@@ -58,12 +58,12 @@
                             ></textarea>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="3">
+                            <button type="submit">Voeg toe</button>
+                        </td>
+                    </tr>
                 </tbody>
-                <tr>
-                    <td colspan="3">
-                        <button type="submit">Voeg toe</button>
-                    </td>
-                </tr>
             </table>
         </form>
 
